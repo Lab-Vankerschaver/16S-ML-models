@@ -1,7 +1,7 @@
 # 16S-ML-models
 **Machine learning models for 16S rRNA sequence classification**
 
-The repository contains code for 5 machine learning models:
+The repository contains code and comparative analyses of 5 machine learning models on different classification tasks and using various preproccessing methods:
 - **Ribosomal Database Project (RDP) Classifier** with k-mer frequency classification
 
     This model was developed by Wang Q. et al (2007).
