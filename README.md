@@ -18,12 +18,12 @@ This repository contains the code and comparative analyses of 5 machine learning
 - **Combined Convolutional BiLSTM (ConvBiLSTM)** with one-hot-encoded sequence classification
     
     This model is based on an architecture developed by Desai P. et al (2020). 
-    Accesse the [paper](https://doi.org/10.1007/978-3-030-57821-3_25 'ConvBiLSTM paper')
+    Access the [paper](https://doi.org/10.1007/978-3-030-57821-3_25 'ConvBiLSTM paper')
     
 - **Attention-based ConvBiLSTM (Read2Pheno)** with one-hot-encoded sequence classification
     
     This model is based on an architecture developed by Zhao Z. et al (2021). 
-    Accesse the [code](https://github.com/z2e2/seq2att 'Read2Pheno code') and the [paper](https://doi.org/10.1371/journal.pcbi.1009345 'Read2Pheno paper')
+    Access the [code](https://github.com/z2e2/seq2att 'Read2Pheno code') and the [paper](https://doi.org/10.1371/journal.pcbi.1009345 'Read2Pheno paper')
 
 
 These models have been combined in the jupyter notebook file (models_notebook). This notebook also contains the scripts required for processing the data and labels, compiling and running the models, and saving and visualizing the results.
