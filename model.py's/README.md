@@ -1,1 +1,1 @@
-This folder contains the python script for each model seperately.
+This folder contains the python scripts for each model seperately.
