@@ -24,3 +24,6 @@ The repository contains code for 5 machine learning models:
     
     This model is based on an architecture developed by Zhao Z. et al (2021). 
     Their code can be accessed here: github.com/z2e2/seq2att and the paper here: doi.org/10.1371/journal.pcbi.1009345
+
+
+These models have been combined in the jupyter notebook file. This notebook also contains the scripts required for processing the data and labels, compiling and running the models, and visualizing the results.
