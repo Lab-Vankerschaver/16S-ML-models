@@ -1,7 +1,7 @@
 # 16S-ML-models
 **Machine learning models for 16S rRNA sequence classification**
 
-The repository contains code and comparative analyses of 5 machine learning models on different classification tasks and using various preproccessing methods:
+This repository contains the code and comparative analyses of 5 machine learning models on different classification tasks and using various preproccessing methods:
 - **Ribosomal Database Project (RDP) Classifier** with k-mer frequency classification
 
     This model was developed by Wang Q. et al (2007).
@@ -26,4 +26,4 @@ The repository contains code and comparative analyses of 5 machine learning mode
     Their code can be accessed here: github.com/z2e2/seq2att and the paper here: doi.org/10.1371/journal.pcbi.1009345
 
 
-These models have been combined in the jupyter notebook file. This notebook also contains the scripts required for processing the data and labels, compiling and running the models, and visualizing the results.
+These models have been combined in the jupyter notebook file (models_notebook). This notebook also contains the scripts required for processing the data and labels, compiling and running the models, and saving and visualizing the results.
