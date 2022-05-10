@@ -2,10 +2,8 @@
 import numpy as np
 import pandas as pd
 import sys
-from varname import argname
+from varname import argname, nameof
 import time
-import string
-import os
 import keras
 import tensorflow as tf
 from tensorflow.keras.optimizers import Adam
@@ -29,19 +27,19 @@ fam_count, gen_count, spe_count = 349, 954, 1569
 
 # LOADING ENCODED SEQUENCES for the CNN models in 2 processing variations
 # FOR CNN  |  with 4-mer
-x_train_CNN_na4 = np.load(f'arrays/CNN/x_train_CNN_na4.npy')
-# x_train_CNN_a4 = np.load(f'arrays/CNN/x_train_CNN_a4.npy')
-x_test_CNN_na4 = np.load(f'arrays/CNN/x_test_CNN_na4.npy')
-dataval_CNN_na4 = np.load(f'arrays/CNN/dataval_CNN_na4.npy')
-# dataval_CNN_a4 = np.load(f'arrays/CNN/dataval_CNN_a4.npy')
+x_train_CNN_na4 = np.load('arrays/CNN/x_train_CNN_na4.npy')
+# x_train_CNN_a4 = np.load('arrays/CNN/x_train_CNN_a4.npy')
+x_test_CNN_na4 = np.load('arrays/CNN/x_test_CNN_na4.npy')
+dataval_CNN_na4 = np.load('arrays/CNN/dataval_CNN_na4.npy')
+# dataval_CNN_a4 = np.load('arrays/CNN/dataval_CNN_a4.npy')
 print('4-mers LOADED')
 # -----------------------------------------------------------------------------
 # FOR CNN  |  with 7-mer
-x_train_CNN_na7 = np.load(f'arrays/CNN/x_train_CNN_na7.npy')
-x_train_CNN_a7 = np.load(f'arrays/CNN/x_train_CNN_a7.npy')
-x_test_CNN_na7 = np.load(f'arrays/CNN/x_test_CNN_na7.npy')
-dataval_CNN_na7 = np.load(f'arrays/CNN/dataval_CNN_na7.npy')
-dataval_CNN_a7 = np.load(f'arrays/CNN/dataval_CNN_a7.npy')
+x_train_CNN_na7 = np.load('arrays/CNN/x_train_CNN_na7.npy')
+x_train_CNN_a7 = np.load('arrays/CNN/x_train_CNN_a7.npy')
+x_test_CNN_na7 = np.load('arrays/CNN/x_test_CNN_na7.npy')
+dataval_CNN_na7 = np.load('arrays/CNN/dataval_CNN_na7.npy')
+dataval_CNN_a7 = np.load('arrays/CNN/dataval_CNN_a7.npy')
 print('7-mers LOADED')
 # -----------------------------------------------------------------------------
 print('CNN sequences LOADED')
@@ -51,27 +49,27 @@ print('CNN sequences LOADED')
 # LOADING one-hot encoded labels at each taxon level
 # -----------------------------------------------------------------------------
 # LABELS AT FAMILY LEVEL
-y_train_fam_na = np.load(f'arrays/CNN/y_train_fam_na.npy')
-# y_train_fam_a = np.load(f'arrays/CNN/y_train_fam_a.npy')
-y_test_fam_na = np.load(f'arrays/CNN/y_test_fam_na.npy')
-labelsval_fam_na = np.load(f'arrays/CNN/labelsval_fam_na.npy')
-# labelsval_fam_a = np.load(f'arrays/CNN/labelsval_fam_a.npy')
+y_train_fam_na = np.load('arrays/family/y_train_fam_na.npy')
+# y_train_fam_a = np.load('arrays/family/y_train_fam_a.npy')
+y_test_fam_na = np.load('arrays/family/y_test_fam_na.npy')
+labelsval_fam_na = np.load('arrays/family/labelsval_fam_na.npy')
+# labelsval_fam_a = np.load('arrays/family/labelsval_fam_a.npy')
 print('Family label arrays LOADED')
 # -----------------------------------------------------------------------------
 # LABELS AT GENUS LEVEL
-y_train_gen_na = np.load(f'arrays/CNN/y_train_gen_na.npy')
-y_train_gen_a = np.load(f'arrays/CNN/y_train_gen_a.npy')
-y_test_gen_na = np.load(f'arrays/CNN/y_test_gen_na.npy')
-labelsval_gen_na = np.load(f'arrays/CNN/labelsval_gen_na.npy')
-labelsval_gen_a = np.load(f'arrays/CNN/labelsval_gen_a.npy')
+y_train_gen_na = np.load('arrays/genus/y_train_gen_na.npy')
+y_train_gen_a = np.load('arrays/genus/y_train_gen_a.npy')
+y_test_gen_na = np.load('arrays/genus/y_test_gen_na.npy')
+labelsval_gen_na = np.load('arrays/genus/labelsval_gen_na.npy')
+labelsval_gen_a = np.load('arrays/genus/labelsval_gen_a.npy')
 print('Genus label arrays LOADED')
 # -----------------------------------------------------------------------------
 # LABELS AT SPECIES LEVEL
-y_train_spe_na = np.load(f'arrays/CNN/y_train_spe_na.npy')
-# y_train_spe_a = np.load(f'arrays/CNN/y_train_spe_a.npy')
-y_test_spe_na = np.load(f'arrays/CNN/y_test_spe_na.npy')
-labelsval_spe_na = np.load(f'arrays/CNN/labelsval_spe_na.npy')
-# labelsval_spe_a = np.load(f'arrays/CNN/labelsval_spe_a.npy')
+y_train_spe_na = np.load('arrays/species/y_train_spe_na.npy')
+# y_train_spe_a = np.load('arrays/species/y_train_spe_a.npy')
+y_test_spe_na = np.load('arrays/species/y_test_spe_na.npy')
+labelsval_spe_na = np.load('arrays/species/labelsval_spe_na.npy')
+# labelsval_spe_a = np.load('arrays/species/labelsval_spe_a.npy')
 print('Species label arrays LOADED')
 
 ###############################################################################

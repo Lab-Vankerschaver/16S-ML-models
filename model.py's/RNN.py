@@ -4,8 +4,6 @@ import pandas as pd
 import sys
 from varname import argname
 import time
-import string
-import os
 import keras
 import tensorflow as tf
 from tensorflow.keras.optimizers import Adam
@@ -13,7 +11,7 @@ from sklearn.metrics import f1_score, matthews_corrcoef, accuracy_score
 
 from keras.models import Sequential, Model
 from keras.layers import Input, Dense, Dropout, Activation, Flatten, Masking, Dot, Add, BatchNormalization
-from keras.layers import MaxPooling1D, AveragePooling1D, Conv1D, Reshape
+from keras.layers import AveragePooling1D, Conv1D
 from keras.layers import TimeDistributed, LSTM, Bidirectional
 
 import wandb
@@ -32,19 +30,19 @@ fam_count, gen_count, spe_count = 349, 954, 1569
 
 # LOADING ENCODED SEQUENCES for the RNN models in 2 processing variations
 # FOR RNN  |  with regular one-hot-encoding
-x_train_RNN_na0 = np.load(f'arrays/CNN/x_train_RNN_na0.npy')
-# x_train_RNN_a0 = np.load(f'arrays/CNN/x_train_RNN_a0.npy')
-x_test_RNN_na0 = np.load(f'arrays/CNN/x_test_RNN_na0.npy')
-dataval_RNN_na0 = np.load(f'arrays/CNN/dataval_RNN_na0.npy')
-# dataval_RNN_a0 = np.load(f'arrays/CNN/dataval_RNN_a0.npy')
+x_train_RNN_na0 = np.load('arrays/RNN/x_train_RNN_na0.npy')
+# x_train_RNN_a0 = np.load('arrays/RNN/x_train_RNN_a0.npy')
+x_test_RNN_na0 = np.load('arrays/RNN/x_test_RNN_na0.npy')
+dataval_RNN_na0 = np.load('arrays/RNN/dataval_RNN_na0.npy')
+# dataval_RNN_a0 = np.load('arrays/RNN/dataval_RNN_a0.npy')
 print('Regular one-hot-encoded sequences LOADED')
 # -----------------------------------------------------------------------------
 # FOR RNN  |  with matation rate adjusted one-hot-encoding
-x_train_RNN_na1 = np.load(f'arrays/CNN/x_train_RNN_na1.npy')
-x_train_RNN_a1 = np.load(f'arrays/CNN/x_train_RNN_a1.npy')
-x_test_RNN_na1 = np.load(f'arrays/CNN/x_test_RNN_na1.npy')
-dataval_RNN_na1 = np.load(f'arrays/CNN/dataval_RNN_na1.npy')
-dataval_RNN_a1 = np.load(f'arrays/CNN/dataval_RNN_a1.npy')
+x_train_RNN_na1 = np.load('arrays/RNN/x_train_RNN_na1.npy')
+x_train_RNN_a1 = np.load('arrays/RNN/x_train_RNN_a1.npy')
+x_test_RNN_na1 = np.load('arrays/RNN/x_test_RNN_na1.npy')
+dataval_RNN_na1 = np.load('arrays/RNN/dataval_RNN_na1.npy')
+dataval_RNN_a1 = np.load('arrays/RNN/dataval_RNN_a1.npy')
 print('Mutation rate adjusted one-hot-encoded sequences LOADED')
 # -----------------------------------------------------------------------------
 print('RNN sequences LOADED')
@@ -54,27 +52,27 @@ print('RNN sequences LOADED')
 # LOADING one-hot encoded labels at each taxon level
 # -----------------------------------------------------------------------------
 # LABELS AT FAMILY LEVEL
-y_train_fam_na = np.load(f'arrays/CNN/y_train_fam_na.npy')
-# y_train_fam_a = np.load(f'arrays/CNN/y_train_fam_a.npy')
-y_test_fam_na = np.load(f'arrays/CNN/y_test_fam_na.npy')
-labelsval_fam_na = np.load(f'arrays/CNN/labelsval_fam_na.npy')
-# labelsval_fam_a = np.load(f'arrays/CNN/labelsval_fam_a.npy')
+y_train_fam_na = np.load('arrays/family/y_train_fam_na.npy')
+# y_train_fam_a = np.load('arrays/family/y_train_fam_a.npy')
+y_test_fam_na = np.load('arrays/family/y_test_fam_na.npy')
+labelsval_fam_na = np.load('arrays/family/labelsval_fam_na.npy')
+# labelsval_fam_a = np.load('arrays/family/labelsval_fam_a.npy')
 print('Family label arrays LOADED')
 # -----------------------------------------------------------------------------
 # LABELS AT GENUS LEVEL
-y_train_gen_na = np.load(f'arrays/CNN/y_train_gen_na.npy')
-y_train_gen_a = np.load(f'arrays/CNN/y_train_gen_a.npy')
-y_test_gen_na = np.load(f'arrays/CNN/y_test_gen_na.npy')
-labelsval_gen_na = np.load(f'arrays/CNN/labelsval_gen_na.npy')
-labelsval_gen_a = np.load(f'arrays/CNN/labelsval_gen_a.npy')
+y_train_gen_na = np.load('arrays/genus/y_train_gen_na.npy')
+y_train_gen_a = np.load('arrays/genus/y_train_gen_a.npy')
+y_test_gen_na = np.load('arrays/genus/y_test_gen_na.npy')
+labelsval_gen_na = np.load('arrays/genus/labelsval_gen_na.npy')
+labelsval_gen_a = np.load('arrays/genus/labelsval_gen_a.npy')
 print('Genus label arrays LOADED')
 # -----------------------------------------------------------------------------
 # LABELS AT SPECIES LEVEL
-y_train_spe_na = np.load(f'arrays/CNN/y_train_spe_na.npy')
-# y_train_spe_a = np.load(f'arrays/CNN/y_train_spe_a.npy')
-y_test_spe_na = np.load(f'arrays/CNN/y_test_spe_na.npy')
-labelsval_spe_na = np.load(f'arrays/CNN/labelsval_spe_na.npy')
-# labelsval_spe_a = np.load(f'arrays/CNN/labelsval_spe_a.npy')
+y_train_spe_na = np.load('arrays/species/y_train_spe_na.npy')
+# y_train_spe_a = np.load('arrays/species/y_train_spe_a.npy')
+y_test_spe_na = np.load('arrays/species/y_test_spe_na.npy')
+labelsval_spe_na = np.load('arrays/species/labelsval_spe_na.npy')
+# labelsval_spe_a = np.load('arrays/species/labelsval_spe_a.npy')
 print('Species label arrays LOADED')
 
 ###############################################################################
@@ -134,7 +132,7 @@ DROP_r, POOL_s = 0.2, 2
 ## BiLSTM layer
 LSTM_nodes = 128
 ## attention Layers
-ATT_layers,vATT_nodes = 1, 128
+ATT_layers, ATT_nodes = 1, 128
 ## fully connected layers
 FC_layers, FC_nodes, FC_drop = 1, 128, 0.3
 
