@@ -2,10 +2,6 @@
 
 import numpy as np
 import pandas as pd
-from varname import nameof
-import tensorflow as tf
-import wandb
-from wandb.keras import WandbCallback
 from itertools import product
 
 print('Packages loaded!')
@@ -58,36 +54,36 @@ def one_hot_k(sequence, kmers):
 # ENCODING SEQUENCES for the CNN model in 2 processing variations (4-mer and 7-mer)
 # FOR CNN  |  with 4-mer
 x_train_CNN_na4 = np.array(train_na['Sequence'].apply(lambda x: one_hot_k(x, four_mers)).tolist())
-np.save(f'arrays/CNN/{nameof(x_train_CNN_na4)}', x_train_CNN_na4)
+np.save('arrays/CNN/x_train_CNN_na4', x_train_CNN_na4)
 
 x_train_CNN_a4 = np.array(train_a['Sequence'].apply(lambda x: one_hot_k(x, four_mers)).tolist())
-np.save(f'arrays/CNN/{nameof(x_train_CNN_a4)}', x_train_CNN_a4)
+np.save('arrays/CNN/x_train_CNN_a4', x_train_CNN_a4)
 
 x_test_CNN_na4 = np.array(test_na['Sequence'].apply(lambda x: one_hot_k(x, four_mers)).tolist())
-np.save(f'arrays/CNN/{nameof(x_test_CNN_na4)}', x_test_CNN_na4)
+np.save('arrays/CNN/x_test_CNN_na4', x_test_CNN_na4)
 
 dataval_CNN_na4 = np.array(val_na['Sequence'].apply(lambda x: one_hot_k(x, four_mers)).tolist())
-np.save(f'arrays/CNN/{nameof(dataval_CNN_na4)}', dataval_CNN_na4)
+np.save('arrays/CNN/dataval_CNN_na4', dataval_CNN_na4)
 
 dataval_CNN_a4 = np.array(val_a['Sequence'].apply(lambda x: one_hot_k(x, four_mers)).tolist())
-np.save(f'arrays/CNN/{nameof(dataval_CNN_a4)}', dataval_CNN_a4)
+np.save('arrays/CNN/dataval_CNN_a4', dataval_CNN_a4)
 print('4-mer complete')
 # --------------------------------------------------------------------------------------------------------------------
 # FOR CNN  |  with 7-mer
 x_train_CNN_na7 = np.array(train_na['Sequence'].apply(lambda x: one_hot_k(x, seven_mers)).tolist())
-np.save(f'arrays/CNN/{nameof(x_train_CNN_na7)}', x_train_CNN_na7)
+np.save('arrays/CNN/x_train_CNN_na7', x_train_CNN_na7)
 
 x_train_CNN_a7 = np.array(train_a['Sequence'].apply(lambda x: one_hot_k(x, seven_mers)).tolist())
-np.save(f'arrays/CNN/{nameof(x_train_CNN_a7)}', x_train_CNN_a7)
+np.save('arrays/CNN/x_train_CNN_a7', x_train_CNN_a7)
 
 x_test_CNN_na7 = np.array(test_na['Sequence'].apply(lambda x: one_hot_k(x, seven_mers)).tolist())
-np.save(f'arrays/CNN/{nameof(x_test_CNN_na7)}', x_test_CNN_na7)
+np.save('arrays/CNN/x_test_CNN_na7', x_test_CNN_na7)
 
 dataval_CNN_na7 = np.array(val_na['Sequence'].apply(lambda x: one_hot_k(x, seven_mers)).tolist())
-np.save(f'arrays/CNN/{nameof(dataval_CNN_na7)}', dataval_CNN_na7)
+np.save('arrays/CNN/dataval_CNN_na7', dataval_CNN_na7)
 
 dataval_CNN_a7 = np.array(val_a['Sequence'].apply(lambda x: one_hot_k(x, seven_mers)).tolist())
-np.save(f'arrays/CNN/{nameof(dataval_CNN_a7)}', dataval_CNN_a7)
+np.save('arrays/CNN/dataval_CNN_a7', dataval_CNN_a7)
 print('7-mer complete')
 # --------------------------------------------------------------------------------------------------------------------
 print('CNN sequences complete')
