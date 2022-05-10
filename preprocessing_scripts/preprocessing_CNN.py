@@ -54,36 +54,36 @@ def one_hot_k(sequence, kmers):
 # ENCODING SEQUENCES for the CNN model in 2 processing variations (3-mer and 6-mer)
 # FOR CNN  |  with 3-mer
 x_train_CNN_na3 = np.array(train_na['Sequence'].apply(lambda x: one_hot_k(x, three_mers)).tolist())
-np.save('arrays/CNN/x_train_CNN_na3', x_train_CNN_na3)
+np.save('arrays/CNN/x_train_CNN_na3.npy', x_train_CNN_na3)
 
 x_train_CNN_a3 = np.array(train_a['Sequence'].apply(lambda x: one_hot_k(x, three_mers)).tolist())
-np.save('arrays/CNN/x_train_CNN_a3', x_train_CNN_a3)
+np.save('arrays/CNN/x_train_CNN_a3.npy', x_train_CNN_a3)
 
 x_test_CNN_na3 = np.array(test_na['Sequence'].apply(lambda x: one_hot_k(x, three_mers)).tolist())
-np.save('arrays/CNN/x_test_CNN_na3', x_test_CNN_na3)
+np.save('arrays/CNN/x_test_CNN_na3.npy', x_test_CNN_na3)
 
 dataval_CNN_na3 = np.array(val_na['Sequence'].apply(lambda x: one_hot_k(x, three_mers)).tolist())
-np.save('arrays/CNN/dataval_CNN_na3', dataval_CNN_na3)
+np.save('arrays/CNN/dataval_CNN_na3.npy', dataval_CNN_na3)
 
 dataval_CNN_a3 = np.array(val_a['Sequence'].apply(lambda x: one_hot_k(x, three_mers)).tolist())
-np.save('arrays/CNN/dataval_CNN_a3', dataval_CNN_a3)
+np.save('arrays/CNN/dataval_CNN_a3.npy', dataval_CNN_a3)
 print('3-mer complete')
 # --------------------------------------------------------------------------------------------------------------------
 # FOR CNN  |  with 6-mer
 x_train_CNN_na6 = np.array(train_na['Sequence'].apply(lambda x: one_hot_k(x, six_mers)).tolist())
-np.save('arrays/CNN/x_train_CNN_na6', x_train_CNN_na6)
+np.save('arrays/CNN/x_train_CNN_na6.npy', x_train_CNN_na6)
 
 x_train_CNN_a6 = np.array(train_a['Sequence'].apply(lambda x: one_hot_k(x, six_mers)).tolist())
-np.save('arrays/CNN/x_train_CNN_a6', x_train_CNN_a6)
+np.save('arrays/CNN/x_train_CNN_a6.npy', x_train_CNN_a6)
 
 x_test_CNN_na6 = np.array(test_na['Sequence'].apply(lambda x: one_hot_k(x, six_mers)).tolist())
-np.save('arrays/CNN/x_test_CNN_na6', x_test_CNN_na6)
+np.save('arrays/CNN/x_test_CNN_na6.npy', x_test_CNN_na6)
 
 dataval_CNN_na6 = np.array(val_na['Sequence'].apply(lambda x: one_hot_k(x, six_mers)).tolist())
-np.save('arrays/CNN/dataval_CNN_na6', dataval_CNN_na6)
+np.save('arrays/CNN/dataval_CNN_na6.npy', dataval_CNN_na6)
 
 dataval_CNN_a6 = np.array(val_a['Sequence'].apply(lambda x: one_hot_k(x, six_mers)).tolist())
-np.save('arrays/CNN/dataval_CNN_a6', dataval_CNN_a6)
+np.save('arrays/CNN/dataval_CNN_a6.npy', dataval_CNN_a6)
 print('6-mer complete')
 # --------------------------------------------------------------------------------------------------------------------
 print('CNN sequences complete')
