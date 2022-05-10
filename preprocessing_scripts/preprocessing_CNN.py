@@ -22,8 +22,8 @@ print('Datasets loaded!')
 
 # define all possible k-mers
 alphabet = "AGTCN"
-four_mers = [''.join(chars) for chars in product(*(4*(alphabet,)))]
-seven_mers = [''.join(chars) for chars in product(*(7*(alphabet,)))]
+three_mers = [''.join(chars) for chars in product(*(3*(alphabet,)))]
+six_mers = [''.join(chars) for chars in product(*(6*(alphabet,)))]
 
 def one_hot_k(sequence, kmers):
     # k-mer length
@@ -51,39 +51,39 @@ def one_hot_k(sequence, kmers):
 
 # Encoding the sequences into k-mer counts and one-hot-encoded sequences
 
-# ENCODING SEQUENCES for the CNN model in 2 processing variations (4-mer and 7-mer)
-# FOR CNN  |  with 4-mer
-x_train_CNN_na4 = np.array(train_na['Sequence'].apply(lambda x: one_hot_k(x, four_mers)).tolist())
-np.save('arrays/CNN/x_train_CNN_na4', x_train_CNN_na4)
+# ENCODING SEQUENCES for the CNN model in 2 processing variations (3-mer and 6-mer)
+# FOR CNN  |  with 3-mer
+x_train_CNN_na3 = np.array(train_na['Sequence'].apply(lambda x: one_hot_k(x, three_mers)).tolist())
+np.save('arrays/CNN/x_train_CNN_na3', x_train_CNN_na3)
 
-x_train_CNN_a4 = np.array(train_a['Sequence'].apply(lambda x: one_hot_k(x, four_mers)).tolist())
-np.save('arrays/CNN/x_train_CNN_a4', x_train_CNN_a4)
+x_train_CNN_a3 = np.array(train_a['Sequence'].apply(lambda x: one_hot_k(x, three_mers)).tolist())
+np.save('arrays/CNN/x_train_CNN_a3', x_train_CNN_a3)
 
-x_test_CNN_na4 = np.array(test_na['Sequence'].apply(lambda x: one_hot_k(x, four_mers)).tolist())
-np.save('arrays/CNN/x_test_CNN_na4', x_test_CNN_na4)
+x_test_CNN_na3 = np.array(test_na['Sequence'].apply(lambda x: one_hot_k(x, three_mers)).tolist())
+np.save('arrays/CNN/x_test_CNN_na3', x_test_CNN_na3)
 
-dataval_CNN_na4 = np.array(val_na['Sequence'].apply(lambda x: one_hot_k(x, four_mers)).tolist())
-np.save('arrays/CNN/dataval_CNN_na4', dataval_CNN_na4)
+dataval_CNN_na3 = np.array(val_na['Sequence'].apply(lambda x: one_hot_k(x, three_mers)).tolist())
+np.save('arrays/CNN/dataval_CNN_na3', dataval_CNN_na3)
 
-dataval_CNN_a4 = np.array(val_a['Sequence'].apply(lambda x: one_hot_k(x, four_mers)).tolist())
-np.save('arrays/CNN/dataval_CNN_a4', dataval_CNN_a4)
-print('4-mer complete')
+dataval_CNN_a3 = np.array(val_a['Sequence'].apply(lambda x: one_hot_k(x, three_mers)).tolist())
+np.save('arrays/CNN/dataval_CNN_a3', dataval_CNN_a3)
+print('3-mer complete')
 # --------------------------------------------------------------------------------------------------------------------
-# FOR CNN  |  with 7-mer
-x_train_CNN_na7 = np.array(train_na['Sequence'].apply(lambda x: one_hot_k(x, seven_mers)).tolist())
-np.save('arrays/CNN/x_train_CNN_na7', x_train_CNN_na7)
+# FOR CNN  |  with 6-mer
+x_train_CNN_na6 = np.array(train_na['Sequence'].apply(lambda x: one_hot_k(x, six_mers)).tolist())
+np.save('arrays/CNN/x_train_CNN_na6', x_train_CNN_na6)
 
-x_train_CNN_a7 = np.array(train_a['Sequence'].apply(lambda x: one_hot_k(x, seven_mers)).tolist())
-np.save('arrays/CNN/x_train_CNN_a7', x_train_CNN_a7)
+x_train_CNN_a6 = np.array(train_a['Sequence'].apply(lambda x: one_hot_k(x, six_mers)).tolist())
+np.save('arrays/CNN/x_train_CNN_a6', x_train_CNN_a6)
 
-x_test_CNN_na7 = np.array(test_na['Sequence'].apply(lambda x: one_hot_k(x, seven_mers)).tolist())
-np.save('arrays/CNN/x_test_CNN_na7', x_test_CNN_na7)
+x_test_CNN_na6 = np.array(test_na['Sequence'].apply(lambda x: one_hot_k(x, six_mers)).tolist())
+np.save('arrays/CNN/x_test_CNN_na6', x_test_CNN_na6)
 
-dataval_CNN_na7 = np.array(val_na['Sequence'].apply(lambda x: one_hot_k(x, seven_mers)).tolist())
-np.save('arrays/CNN/dataval_CNN_na7', dataval_CNN_na7)
+dataval_CNN_na6 = np.array(val_na['Sequence'].apply(lambda x: one_hot_k(x, six_mers)).tolist())
+np.save('arrays/CNN/dataval_CNN_na6', dataval_CNN_na6)
 
-dataval_CNN_a7 = np.array(val_a['Sequence'].apply(lambda x: one_hot_k(x, seven_mers)).tolist())
-np.save('arrays/CNN/dataval_CNN_a7', dataval_CNN_a7)
-print('7-mer complete')
+dataval_CNN_a6 = np.array(val_a['Sequence'].apply(lambda x: one_hot_k(x, six_mers)).tolist())
+np.save('arrays/CNN/dataval_CNN_a6', dataval_CNN_a6)
+print('6-mer complete')
 # --------------------------------------------------------------------------------------------------------------------
 print('CNN sequences complete')
