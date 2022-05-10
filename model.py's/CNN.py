@@ -2,7 +2,7 @@
 import numpy as np
 import pandas as pd
 import sys
-from varname import argname, nameof
+from varname import argname
 import time
 import string
 import os
@@ -18,7 +18,7 @@ from keras.layers import MaxPooling1D, AveragePooling1D, Conv1D, Reshape
 import wandb
 from wandb.keras import WandbCallback
 
-LR, BATCH_SIZE, EPOCHS, MAX_LEN, INPUT_SHAPE_RNN, INPUT_SHAPE_4_MER, INPUT_SHAPE_7_MER = 0.001, 8, 3, 2000, (2000, 4), (625, 1), (78125, 1)
+LR, BATCH_SIZE, EPOCHS, INPUT_SHAPE_4_MER, INPUT_SHAPE_7_MER = 0.001, 128, 60, (625, 1), (78125, 1)
 
 print('Packages loaded!')
 
