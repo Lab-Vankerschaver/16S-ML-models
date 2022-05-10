@@ -155,7 +155,9 @@ def RDPoutput2score(pred_file, true_file, level, cf):
     f1 = f1_score(y_true, y_pred, average='weighted') # works well if both y_true_decode and y_pred are list
     mcc = matthews_corrcoef(y_true, y_pred)
 
-    print("accuracy: {}\nF1-score: {}\nMCC-score: {}".format(acc, f1, mcc))
+    score_dict = pd.DataFrame({'Model/run' : 'RDP', 'Data' : 'train_na', 'Training time' : None, 'Test loss' : None, 'Test accuracy' : acc, 'F1-score' : f1, 'MCC' : mcc}, index=[0])
+    print(score_dict)
+    return score_dict
 
 ###############################################################################
 
@@ -207,5 +209,7 @@ print("RDP training-time: {} seconds".format(time_taken))
 # Testing the RDP classifier
 os.system("java -Xmx10g -jar {} classify -t {}/training_files/rRNAClassifier.properties  -o {}/output.txt {}/test_sequences.fasta".format(classifier_loc, RDPfiles, RDPfiles, RDPfiles))
 
-# Evaluating the RDP classifier
-RDPoutput2score("{}/output.txt".format(RDPfiles), "{}/test_taxonomy.txt".format(RDPfiles), level, confidence_score)
+# Evaluating the RDP classifier and save the results
+score_dict = RDPoutput2score("{}/output.txt".format(RDPfiles), "{}/test_taxonomy.txt".format(RDPfiles), level, confidence_score)
+score_dict.at[0, 'Training time'] = time_taken
+score_dict.to_csv(f'scores/RDP_evaluation', index=False)
