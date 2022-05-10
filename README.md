@@ -1,7 +1,7 @@
 # 16S-ML-models
 **Machine learning models for 16S rRNA sequence classification**
 
-This repository contains the code and comparative analyses of 5 machine learning models on different classification tasks and using various preproccessing methods:
+This repository contains the code and comparative analyses of 5 machine learning models on different classification tasks and using various preproccessing methods. A list of models used for bacterial taxonomy classification with the curated 16S rRNA gene is as follows:
 - **Ribosomal Database Project (RDP) Classifier** with k-mer frequency classification
 
     This model was developed by Wang Q. et al (2007).
@@ -27,4 +27,4 @@ This repository contains the code and comparative analyses of 5 machine learning
     Access the [code](https://github.com/z2e2/seq2att 'Read2Pheno code') and the [paper](https://doi.org/10.1371/journal.pcbi.1009345 'Read2Pheno paper')
 
 
-These models have been combined in the jupyter notebook file (models_notebook). This notebook also contains the scripts required for processing the data and labels, compiling and running the models, and saving and visualizing the results.
+These models have been combined in the jupyter notebook file (models_notebook.ipynb). This notebook also contains the scripts required for preprocessing the data and labels, compiling and running the models, and saving and visualising the results.
