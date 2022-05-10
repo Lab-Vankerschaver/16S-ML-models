@@ -31,36 +31,36 @@ def one_hot_seq(sequence, one_hot_dict, MAX_LEN=MAX_LEN):
 # ENCODING SEQUENCES for the RNN model in 2 processing variations
 # FOR RNN  |  with regular one-hot-encoding
 x_train_RNN_na0 = np.array(train_na['Sequence'].apply(lambda x: one_hot_seq(x, one_hot_dict0)).tolist())
-np.save('arrays/RNN/x_train_RNN_na0', x_train_RNN_na0)
+np.save('arrays/RNN/x_train_RNN_na0.npy', x_train_RNN_na0)
 
 x_train_RNN_a0 = np.array(train_a['Sequence'].apply(lambda x: one_hot_seq(x, one_hot_dict0)).tolist())
-np.save('arrays/RNN/x_train_RNN_a0', x_train_RNN_a0)
+np.save('arrays/RNN/x_train_RNN_a0.npy', x_train_RNN_a0)
 
 x_test_RNN_na0 = np.array(test_na['Sequence'].apply(lambda x: one_hot_seq(x, one_hot_dict0)).tolist())
-np.save('arrays/RNN/x_test_RNN_na0', x_test_RNN_na0)
+np.save('arrays/RNN/x_test_RNN_na0.npy', x_test_RNN_na0)
 
 dataval_RNN_na0 = np.array(val_na['Sequence'].apply(lambda x: one_hot_seq(x, one_hot_dict0)).tolist())
-np.save('arrays/RNN/dataval_RNN_na0', dataval_RNN_na0)
+np.save('arrays/RNN/dataval_RNN_na0.npy', dataval_RNN_na0)
 
 dataval_RNN_a0 = np.array(val_a['Sequence'].apply(lambda x: one_hot_seq(x, one_hot_dict0)).tolist())
-np.save('arrays/RNN/dataval_RNN_a0', dataval_RNN_a0)
+np.save('arrays/RNN/dataval_RNN_a0.npy', dataval_RNN_a0)
 print('Regular one-hot-encoding complete')
 # --------------------------------------------------------------------------------------------------------------------
 # FOR RNN  |  with matation rate adjusted one-hot-encoding
 x_train_RNN_na1 = np.array(train_na['Sequence'].apply(lambda x: one_hot_seq(x, one_hot_dict1)).tolist())
-np.save('arrays/RNN/x_train_RNN_na1', x_train_RNN_na1)
+np.save('arrays/RNN/x_train_RNN_na1.npy', x_train_RNN_na1)
 
 x_train_RNN_a1 = np.array(train_a['Sequence'].apply(lambda x: one_hot_seq(x, one_hot_dict1)).tolist())#
-np.save('arrays/RNN/x_train_RNN_a1', x_train_RNN_a1)
+np.save('arrays/RNN/x_train_RNN_a1.npy', x_train_RNN_a1)
 
 x_test_RNN_na1 = np.array(test_na['Sequence'].apply(lambda x: one_hot_seq(x, one_hot_dict1)).tolist())
-np.save('arrays/RNN/x_test_RNN_na1', x_test_RNN_na1)
+np.save('arrays/RNN/x_test_RNN_na1.npy', x_test_RNN_na1)
 
 dataval_RNN_na1 = np.array(val_na['Sequence'].apply(lambda x: one_hot_seq(x, one_hot_dict1)).tolist())
-np.save('arrays/RNN/dataval_RNN_na1', dataval_RNN_na1)
+np.save('arrays/RNN/dataval_RNN_na1.npy', dataval_RNN_na1)
 
 dataval_RNN_a1 = np.array(val_a['Sequence'].apply(lambda x: one_hot_seq(x, one_hot_dict1)).tolist())#
-np.save('arrays/RNN/dataval_RNN_a1', dataval_RNN_a1)
+np.save('arrays/RNN/dataval_RNN_a1.npy', dataval_RNN_a1)
 print('Mutations rate adjusted one-hot-encoding complete')
 # --------------------------------------------------------------------------------------------------------------------    
 print('RNN sequences complete')
