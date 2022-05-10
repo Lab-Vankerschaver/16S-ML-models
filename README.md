@@ -9,7 +9,7 @@ This repository contains the code and comparative analyses of 5 machine learning
     
 - **Convolutional Neural Networks (CNN)** with k-mer frequency classification
 
-    This model was developed by Fiannaca, A. et al (2018).
+    This model is based on an architecture developed by Fiannaca, A. et al (2018).
     Access the [github repository](https://github.com/IcarPA-TBlab/MetagenomicDC) and the [paper](https://bmcbioinformatics.biomedcentral.com/articles/10.1186/s12859-018-2182-6)
     
 - **Bilateral Long-Short Term Memory NN (BiLSTM)** with one-hot-encoded sequence classification
