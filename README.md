@@ -4,26 +4,27 @@
 This repository contains the code and comparative analyses of 5 machine learning models on different classification tasks and using various preproccessing methods. A list of models used for bacterial taxonomy classification with the curated 16S rRNA gene is as follows:
 - **Ribosomal Database Project (RDP) Classifier** with k-mer frequency classification
 
-    This model was developed by Wang Q. et al (2007).
+    This model was developed by Wang, Q. et al (2007).
     Access the [code](https://github.com/rdpstaff/classifier 'RDP Classifier code') and the [paper](https://doi.org/10.1128/AEM.00062-07 'RDP Classifier paper')
     
 - **Convolutional Neural Networks (CNN)** with k-mer frequency classification
 
-    This model...
+    This model was developed by Fiannaca, A. et al (2018).
+    Access the [code](https://github.com/IcarPA-TBlab/MetagenomicDC) and the [paper](https://bmcbioinformatics.biomedcentral.com/articles/10.1186/s12859-018-2182-6)
     
 - **Bilateral Long-Short Term Memory NN (BiLSTM)** with one-hot-encoded sequence classification
     
     This model is based on an architecture developed by Philipp Münch.
-    Acess the [github repository](https://github.com/philippmuench/dna_lstm)
+    Access the [github repository](https://github.com/philippmuench/dna_lstm)
     
 - **Combined Convolutional BiLSTM (ConvBiLSTM)** with one-hot-encoded sequence classification
     
-    This model is based on an architecture developed by Desai P. et al (2020). 
+    This model is based on an architecture developed by Desai, P. et al (2020). 
     Access the [paper](https://doi.org/10.1007/978-3-030-57821-3_25 'ConvBiLSTM paper')
     
 - **Attention-based ConvBiLSTM (Read2Pheno)** with one-hot-encoded sequence classification
     
-    This model is based on an architecture developed by Zhao Z. et al (2021). 
+    This model is based on an architecture developed by Zhao, Z. et al (2021). 
     Access the [code](https://github.com/z2e2/seq2att 'Read2Pheno code') and the [paper](https://doi.org/10.1371/journal.pcbi.1009345 'Read2Pheno paper')
 
 
