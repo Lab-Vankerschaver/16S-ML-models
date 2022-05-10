@@ -19,7 +19,7 @@ from keras.layers import TimeDistributed, LSTM, Bidirectional
 import wandb
 from wandb.keras import WandbCallback
 
-LR, BATCH_SIZE, EPOCHS, MAX_LEN, INPUT_SHAPE_RNN, INPUT_SHAPE_4_MER, INPUT_SHAPE_7_MER = 0.001, 8, 3, 2000, (2000, 4), (625, 1), (78125, 1)
+LR, BATCH_SIZE, EPOCHS, MAX_LEN, INPUT_SHAPE_RNN, INPUT_SHAPE_4_MER, INPUT_SHAPE_7_MER = 0.001, 128, 60, 2000, (2000, 4), (625, 1), (78125, 1)
 
 print('Packages loaded!')
 
