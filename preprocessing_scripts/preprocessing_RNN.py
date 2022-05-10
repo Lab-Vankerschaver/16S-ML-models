@@ -1,0 +1,68 @@
+import numpy as np
+from varname import nameof
+import pandas as pd
+MAX_LEN  = 2000
+
+# LOADING THE NON-AUGMENTED AND AUGMENTED DATASETS
+
+train_na = pd.read_csv('df_train_0.csv')
+val_na = pd.read_csv('df_val_0.csv')
+test_na = pd.read_csv('df_test_0.csv')
+
+train_a = pd.read_csv('df_train_1.csv')
+val_a = pd.read_csv('df_val_1.csv')
+
+# ### One-hot-encoding the sequences
+# For use in the various Recurrent Neural Networks (RNN), the nucleotide sequences are processed into a one-hot-encoding format.
+
+# Dictionary without consideration of mutation rate (AGTC)
+one_hot_dict0 = {'A': [1.,0.,0.,0.], 'G':[0.,1.,0.,0.], 'T':[0.,0.,1.,0.], 'U':[0.,0.,1.,0.], 'C':[0.,0.,0.,1.], 'Y':[0.,0.,0.5,0.5], 'R':[0.5,0.5,0.,0.], 'W':[0.5,0.,0.5,0.], 'S':[0.,0.5,0.,0.5], 'K':[0.,0.5,0.5,0.], 'M':[0.5,0.,0.,0.5], 'D':[0.33,0.33,0.33,0.], 'V':[0.33,0.33,0.,0.33], 'H':[0.33,0.,0.33,0.33], 'B':[0.,0.33,0.33,0.33], 'X':[0.25,0.25,0.25,0.25], 'N':[0.25,0.25,0.25,0.25], '-':[0.,0.,0.,0.]}
+# Dictionary with consideration of mutation rate (AGTC)
+one_hot_dict1 = {'A': [1.,0.,-0.5,-0.5], 'G':[0.,1.,-0.5,-0.5], 'T':[-0.5,-0.5,1.,0.], 'U':[-0.5,-0.5,1.,0.], 'C':[-0.5,-0.5,0.,1.], 'Y':[-0.5,-0.5,0.5,0.5], 'R':[0.5,0.5,-0.5,-0.5], 'W':[0.5,-0.5,0.5,-0.5], 'S':[-0.5,0.5,-0.5,0.5], 'K':[-0.5,0.5,0.5,-0.5], 'M':[0.5,-0.5,-0.5,0.5], 'D':[0.33,0.33,0.33,-1.], 'V':[0.33,0.33,-1.,0.33], 'H':[0.33,-1.,.33,0.33], 'B':[-1.,0.33,0.33,0.33], 'X':[0.,0.,0.,0.], 'N':[0.,0.,0.,0.], '-':[0.,0.,0.,0.]}
+
+def one_hot_seq(sequence, one_hot_dict, MAX_LEN=MAX_LEN):
+    # padding the sequences to a fixed length
+	sequence += '-'*(MAX_LEN - len(sequence))
+    # generating list of one-hot-lists using the dictionary
+	onehot_encoded = [one_hot_dict[nucleotide] for nucleotide in sequence]
+    # returning the list of lists as a numpy array
+	return np.array(onehot_encoded)
+
+
+# ENCODING SEQUENCES for the RNN model in 2 processing variations
+# FOR RNN  |  with regular one-hot-encoding
+x_train_RNN_na0 = np.array(train_na['Sequence'].apply(lambda x: one_hot_seq(x, one_hot_dict0)).tolist())
+np.save(f'arrays/RNN/{nameof(x_train_RNN_na0)}', x_train_RNN_na0)
+
+x_train_RNN_a0 = np.array(train_a['Sequence'].apply(lambda x: one_hot_seq(x, one_hot_dict0)).tolist())
+np.save(f'arrays/RNN/{nameof(x_train_RNN_a0)}', x_train_RNN_a0)
+
+x_test_RNN_na0 = np.array(test_na['Sequence'].apply(lambda x: one_hot_seq(x, one_hot_dict0)).tolist())
+np.save(f'arrays/RNN/{nameof(x_test_RNN_na0)}', x_test_RNN_na0)
+
+dataval_RNN_na0 = np.array(val_na['Sequence'].apply(lambda x: one_hot_seq(x, one_hot_dict0)).tolist())
+np.save(f'arrays/RNN/{nameof(dataval_RNN_na0)}', dataval_RNN_na0)
+
+dataval_RNN_a0 = np.array(val_a['Sequence'].apply(lambda x: one_hot_seq(x, one_hot_dict0)).tolist())
+np.save(f'arrays/RNN/{nameof(dataval_RNN_a0)}', dataval_RNN_a0)
+print('Regular one-hot-encoding complete')
+# --------------------------------------------------------------------------------------------------------------------
+# FOR RNN  |  with matation rate adjusted one-hot-encoding
+x_train_RNN_na1 = np.array(train_na['Sequence'].apply(lambda x: one_hot_seq(x, one_hot_dict1)).tolist())
+np.save(f'arrays/RNN/{nameof(x_train_RNN_na1)}', x_train_RNN_na1)
+
+x_train_RNN_a1 = np.array(train_a['Sequence'].apply(lambda x: one_hot_seq(x, one_hot_dict1)).tolist())#
+np.save(f'arrays/RNN/{nameof(x_train_RNN_a1)}', x_train_RNN_a1)
+
+x_test_RNN_na1 = np.array(test_na['Sequence'].apply(lambda x: one_hot_seq(x, one_hot_dict1)).tolist())
+np.save(f'arrays/RNN/{nameof(x_test_RNN_na1)}', x_test_RNN_na1)
+
+dataval_RNN_na1 = np.array(val_na['Sequence'].apply(lambda x: one_hot_seq(x, one_hot_dict1)).tolist())
+np.save(f'arrays/RNN/{nameof(dataval_RNN_na1)}', dataval_RNN_na1)
+
+dataval_RNN_a1 = np.array(val_a['Sequence'].apply(lambda x: one_hot_seq(x, one_hot_dict1)).tolist())#
+np.save(f'arrays/RNN/{nameof(dataval_RNN_a1)}', dataval_RNN_a1)
+print('Mutations rate adjusted one-hot-encoding complete')
+# --------------------------------------------------------------------------------------------------------------------    
+print('RNN sequences complete')
+
