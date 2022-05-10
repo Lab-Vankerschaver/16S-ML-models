@@ -13,7 +13,8 @@ This repository contains the code and comparative analyses of 5 machine learning
     
 - **Bilateral Long-Short Term Memomry NN (BiLSTM)** with one-hot-encoded sequence classification
     
-    This model...
+    This model is based on an architecture developed by Philipp Münch.
+    Acess the [github repository](https://github.com/philippmuench/dna_lstm)
     
 - **Combined Convolutional BiLSTM (ConvBiLSTM)** with one-hot-encoded sequence classification
     
