@@ -7,11 +7,11 @@ This repository contains the code and comparative analyses of 5 machine learning
     This model was developed by Wang Q. et al (2007).
     Access the [code](https://github.com/rdpstaff/classifier 'RDP Classifier code') and the [paper](https://doi.org/10.1128/AEM.00062-07 'RDP Classifier paper')
     
-- **Convolutional Neural Network (CNN)** with k-mer frequency classification
+- **Convolutional Neural Networks (CNN)** with k-mer frequency classification
 
     This model...
     
-- **Bilateral Long-Short Term Memomry NN (BiLSTM)** with one-hot-encoded sequence classification
+- **Bilateral Long-Short Term Memory NN (BiLSTM)** with one-hot-encoded sequence classification
     
     This model is based on an architecture developed by Philipp Münch.
     Acess the [github repository](https://github.com/philippmuench/dna_lstm)
