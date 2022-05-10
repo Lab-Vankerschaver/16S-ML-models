@@ -1,5 +1,4 @@
 import numpy as np
-from varname import nameof
 import pandas as pd
 from tensorflow.keras.utils import to_categorical
 
@@ -35,19 +34,19 @@ taxon_dict = get_taxon_dict(test_na, taxon)[0]
 
 # Associate every entry's label in the df to a number using the dictionary & one-hot encode the numerical labels
 y_train_fam_na = to_categorical(y=train_na[taxon].map(taxon_dict).astype(np.float32))
-np.save(f'arrays/family/{nameof(y_train_fam_na)}', y_train_fam_na)
+np.save('arrays/family/y_train_fam_na', y_train_fam_na)
 
 y_train_fam_a = to_categorical(y=train_a[taxon].map(taxon_dict).astype(np.float32))
-np.save(f'arrays/family/{nameof(y_train_fam_a)}', y_train_fam_a)
+np.save('arrays/family/y_train_fam_a', y_train_fam_a)
 
 y_test_fam_na = to_categorical(y=test_na[taxon].map(taxon_dict).astype(np.float32))
-np.save(f'arrays/family/{nameof(y_test_fam_na)}', y_test_fam_na)
+np.save('arrays/family/y_test_fam_na', y_test_fam_na)
 
 labelsval_fam_na = to_categorical(y=val_na[taxon].map(taxon_dict).astype(np.float32))
-np.save(f'arrays/family/{nameof(labelsval_fam_na)}', labelsval_fam_na)
+np.save('arrays/family/labelsval_fam_na', labelsval_fam_na)
 
 labelsval_fam_a = to_categorical(y=val_a[taxon].map(taxon_dict).astype(np.float32))
-np.save(f'arrays/family/{nameof(labelsval_fam_a)}', labelsval_fam_a)
+np.save('arrays/family/labelsval_fam_a', labelsval_fam_a)
 print('Family label arrays generated')
 #---------------------------------------------------------------------------------------------------------------------
 fam_count = train_na[taxon].nunique()
@@ -62,19 +61,19 @@ taxon = 'Genus'
 taxon_dict = get_taxon_dict(test_na, taxon)[0]
 
 y_train_gen_na = to_categorical(y=train_na[taxon].map(taxon_dict).astype(np.float32))
-np.save(f'arrays/genus/{nameof(y_train_gen_na)}', y_train_gen_na)
+np.save('arrays/genus/y_train_gen_na', y_train_gen_na)
 
 y_train_gen_a = to_categorical(y=train_a[taxon].map(taxon_dict).astype(np.float32))
-np.save(f'arrays/genus/{nameof(y_train_gen_a)}', y_train_gen_a)
+np.save('arrays/genus/y_train_gen_a', y_train_gen_a)
 
 y_test_gen_na = to_categorical(y=test_na[taxon].map(taxon_dict).astype(np.float32))
-np.save(f'arrays/genus/{nameof(y_test_gen_na)}', y_test_gen_na)
+np.save('arrays/genus/y_test_gen_na', y_test_gen_na)
 
 labelsval_gen_na = to_categorical(y=val_na[taxon].map(taxon_dict).astype(np.float32))
-np.save(f'arrays/genus/{nameof(labelsval_gen_na)}', labelsval_gen_na)
+np.save('arrays/genus/labelsval_gen_na', labelsval_gen_na)
 
 labelsval_gen_a = to_categorical(y=val_a[taxon].map(taxon_dict).astype(np.float32))
-np.save(f'arrays/genus/{nameof(labelsval_gen_a)}', labelsval_gen_a)
+np.save('arrays/genus/labelsval_gen_a', labelsval_gen_a)
 print('Genus label arrays generated')
 #---------------------------------------------------------------------------------------------------------------------
 gen_count = train_na[taxon].nunique()
@@ -89,20 +88,20 @@ taxon = 'Species'
 taxon_dict = get_taxon_dict(test_na, taxon)[0]
 
 y_train_spe_na = to_categorical(y=train_na[taxon].map(taxon_dict).astype(np.float32))
-np.save(f'arrays/species/{nameof(y_train_spe_na)}', y_train_spe_na)
+np.save('arrays/species/y_train_spe_na', y_train_spe_na)
 
 y_train_spe_a = to_categorical(y=train_a[taxon].map(taxon_dict).astype(np.float32))
-np.save(f'arrays/species/{nameof(y_train_spe_a)}', y_train_spe_a)
+np.save('arrays/species/y_train_spe_a', y_train_spe_a)
 
 y_test_spe_na = to_categorical(y=test_na[taxon].map(taxon_dict).astype(np.float32))
-np.save(f'arrays/species/{nameof(y_test_spe_na)}', y_test_spe_na)
+np.save('arrays/species/y_test_spe_na', y_test_spe_na)
 
 labelsval_spe_na = to_categorical(y=val_na[taxon].map(taxon_dict).astype(np.float32))
-np.save(f'arrays/species/{nameof(labelsval_spe_na)}', labelsval_spe_na)
+np.save('arrays/species/labelsval_spe_na', labelsval_spe_na)
 
 labelsval_spe_a = to_categorical(y=val_a[taxon].map(taxon_dict).astype(np.float32))
-np.save(f'arrays/species/{nameof(labelsval_spe_a)}', labelsval_spe_a)
+np.save('arrays/species/labelsval_spe_a', labelsval_spe_a)
 print('Species label arrays generated')
 #---------------------------------------------------------------------------------------------------------------------
-spe_count = train_na[taxon].nunique()
+spe_count = train_na[taxon].nunique)
 print(f'The number of unique species labels: {spe_count}')
