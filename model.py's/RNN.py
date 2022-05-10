@@ -2,7 +2,7 @@
 import numpy as np
 import pandas as pd
 import sys
-from varname import argname, nameof
+from varname import argname
 import time
 import string
 import os
@@ -299,7 +299,7 @@ R2P_gen_0_history, R2P_gen_0_score_dict = train_and_evaluate_model(R2P_gen, x_tr
 
 BiLSTM_gen_history, BiLSTM_gen_score_dict = train_and_evaluate_model(BiLSTM_gen, x_train_RNN_na1, y_train_gen_na, dataval_RNN_na1, labelsval_gen_na, x_test_RNN_na1, y_test_gen_na)
 ConvBiLSTM_gen_history, ConvBiLSTM_gen_score_dict = train_and_evaluate_model(ConvBiLSTM_gen, x_train_RNN_na1, y_train_gen_na, dataval_RNN_na1, labelsval_gen_na, x_test_RNN_na1, y_test_gen_na)
-R2P_gen_1_history, R2P_gen_1_score_dict = train_and_evaluate_model(R2P_gen, x_train_RNN_na1, y_train_gen_na, dataval_RNN_na1, labelsval_gen_na, x_test_RNN_na1, y_test_gen_na)
+R2P_gen_history, R2P_gen_score_dict = train_and_evaluate_model(R2P_gen, x_train_RNN_na1, y_train_gen_na, dataval_RNN_na1, labelsval_gen_na, x_test_RNN_na1, y_test_gen_na)
 # -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 # running the models at family and species level with the mutation rate adjusted one-hot-encoding
 BiLSTM_fam_history, BiLSTM_fam_score_dict = train_and_evaluate_model(BiLSTM_fam, x_train_RNN_na1, y_train_fam_na, dataval_RNN_na1, labelsval_fam_na, x_test_RNN_na1, y_test_fam_na)
