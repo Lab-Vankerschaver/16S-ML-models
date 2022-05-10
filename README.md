@@ -29,3 +29,5 @@ This repository contains the code and comparative analyses of 5 machine learning
 
 
 These models have been combined in the jupyter notebook file (models_notebook.ipynb). This notebook also contains the scripts required for preprocessing the data and labels, compiling and running the models, and saving and visualising the results.
+
+The seperate data-processing and model-training scripts can be use when the memory requirements for running the complete jupyter notebook are too high for the user's system.
