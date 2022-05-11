@@ -1,3 +1,3 @@
-This folder contains the python scripts for each model-type seperately.
+This folder contains the scripts necessary to compile and train the deep learning models.
 
-Note that running RDP.py requires the 'rdptools' folder from the RDP classifier to be in the same directory.
+Note that running RDP.py requires the 'rdptools' folder from RDP-Classifier to be in the same directory.
