@@ -1,27 +1,24 @@
 # LOADING PACKAGES
-import numpy as np
 import pandas as pd
 import sys
 import time
-import string
 import os
 from sklearn.metrics import f1_score, matthews_corrcoef, accuracy_score
-
 print('Packages loaded!')
 
-###############################################################################
+####################################################################################################
 
 # LOADING THE NON-AUGMENTED AND AUGMENTED DATASETS
 train_na = pd.read_csv('df_train_0.csv')
 val_na = pd.read_csv('df_val_0.csv')
-test = pd.read_csv('df_test_0.csv')
+test_na = pd.read_csv('df_test_0.csv')
 # ------------------------------------------------
-# train_a = pd.read_csv('df_train_1.csv')
-# val_a = pd.read_csv('df_val_1.csv')
+train_a = pd.read_csv('df_train_1.csv')
+val_a = pd.read_csv('df_val_1.csv')
 # ------------------------------------------------
 print('Datasets loaded!')
 
-###############################################################################
+####################################################################################################
 
 global RDPfiles
 
@@ -31,7 +28,7 @@ classifier_loc = "rdptools/classifier.jar"
 confidence_score = 0.8
 level = 'genus' #ranks = ['kingdom', 'phylum', 'class', 'order', 'family', 'genus', 'species']
 
-###############################################################################
+####################################################################################################
 
 def lineage2taxTrain(raw_taxons):
     taxons_list = raw_taxons.strip().split('\n')
@@ -152,27 +149,28 @@ def RDPoutput2score(pred_file, true_file, level, cf):
         y_true.append(taxon_list.index(true_dict[i]))
 
     acc = accuracy_score(y_true, y_pred)
-    f1 = f1_score(y_true, y_pred, average='weighted') # works well if both y_true_decode and y_pred are list
+    f1 = f1_score(y_true, y_pred, average='weighted')
     mcc = matthews_corrcoef(y_true, y_pred)
 
     score_dict = pd.DataFrame({'Model/run' : 'RDP', 'Data' : 'train_na', 'Training time' : None, 'Test loss' : None, 'Test accuracy' : acc, 'F1-score' : f1, 'MCC' : mcc}, index=[0])
     print(score_dict)
     return score_dict
 
-###############################################################################
+####################################################################################################
 
 # main_RDP.py
 os.system("mkdir {}".format(RDPfiles))
 
 # merge train and validation dataframes into one.
 train = pd.concat([train_na, val_na], ignore_index=True)
-# train_na = pd.concat([train_a, val_a], ignore_index=True)
+# train = pd.concat([train_a, val_a], ignore_index=True)
+test = test_na
 
 # convert train and test dataframe into tab separated taxonomy and sequence string
 # taxnomy file is converted to a tab separated string
 # sequence file is converted to fasta format with sequence ID and sequence
 raw_seqs = ''
-raw_taxons = 'SeqId	Kingdom	Phylum	Class	Order	Family	Genus	Species' + '\n'
+raw_taxons = 'SeqId Kingdom	Phylum	Class	Order	Family	Genus	Species' + '\n'
 for index, row in train.iterrows():
     taxons = row.tolist()
     raw_seqs += '>' + taxons[0] + '\n' + taxons[-1] + '\n'
@@ -182,7 +180,7 @@ for index, row in train.iterrows():
 # taxnomy file is converted to a tab separated text file
 # sequence file is converted to fasta format
 with open("{}/test_sequences.fasta".format(RDPfiles), "w") as seq_f, open("{}/test_taxonomy.txt".format(RDPfiles), "w") as tax_f:
-    for index,row in test.iterrows():
+    for index, row in test.iterrows():
         taxons = row.tolist()
         seq_f.write('>' + taxons[0] + '\n' + taxons[-1] + '\n')
         tax_f.write('\t'.join(taxons[:-1]) + '\n')
@@ -195,7 +193,7 @@ addFullLineage(raw_taxons, raw_seqs)
 
 print("Data preprocessing for RDP completed")
 
-###############################################################################
+####################################################################################################
 
 # Training the RDP classifier
 start_time = time.time()
@@ -212,4 +210,5 @@ os.system("java -Xmx10g -jar {} classify -t {}/training_files/rRNAClassifier.pro
 # Evaluating the RDP classifier and save the results
 score_dict = RDPoutput2score("{}/output.txt".format(RDPfiles), "{}/test_taxonomy.txt".format(RDPfiles), level, confidence_score)
 score_dict.at[0, 'Training time'] = time_taken
+print(score_dict)
 score_dict.to_csv(f'scores/RDP_evaluation', index=False)
