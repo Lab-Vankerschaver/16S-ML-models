@@ -25,7 +25,7 @@ alphabet_noN = "AGTC"
 tri_mers = [''.join(chars) for chars in product(*(3*(alphabet,)))]
 fiv_mers = [''.join(chars) for chars in product(*(5*(alphabet,)))]
 sev_mers = [''.join(chars) for chars in product(*(7*(alphabet,)))]
-sev_mers_no_N = [''.join(chars) for chars in product(*(7*(alphabet,)))]
+sev_mers_no_N = [''.join(chars) for chars in product(*(7*(alphabet_noN,)))]
 
 def one_hot_k(sequence, kmers):
     k = len(kmers[0])
