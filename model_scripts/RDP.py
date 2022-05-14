@@ -21,12 +21,26 @@ print('Datasets loaded!')
 ####################################################################################################
 
 global RDPfiles
+import pandas as pd
+# runs to do
+#   - genus level with 3 data types (non-augmented, augmented, V-selected)
+#   - family and species level with non-augmented
 
-#variables
+# variables
 RDPfiles = "RDPfiles"
 classifier_loc = "rdptools/classifier.jar"
 confidence_score = 0.8
-level = 'genus' #ranks = ['kingdom', 'phylum', 'class', 'order', 'family', 'genus', 'species']
+level = 'genus'             # used for evaluation
+model_run = 'RDP_gen'       # used for naming the run (change taxon)
+data = 'x_train_RDP_naX'    # used for naming the data (change na/n/V)
+seq_col = -1                # used for selecting sequence (change -1/-2 for V_seq col)
+is_v = -1                   # used for selecting taxa (change to -2 if there is a V_seq col)
+# loading data
+train_data = pd.read.csv('df_train_0.csv')  # change 1/0 for a/na data
+val_data = pd.read_csv('df_val_0.csv')      # change 1/0 for a/na data
+test_data = pd.read_csv('df_test_0.csv')
+
+print('Variables set and datasets loaded!')
 
 ####################################################################################################
 
@@ -152,7 +166,16 @@ def RDPoutput2score(pred_file, true_file, level, cf):
     f1 = f1_score(y_true, y_pred, average='weighted')
     mcc = matthews_corrcoef(y_true, y_pred)
 
-    score_dict = pd.DataFrame({'Model/run' : 'RDP', 'Data' : 'train_na', 'Training time' : None, 'Test loss' : None, 'Test accuracy' : acc, 'F1-score' : f1, 'MCC' : mcc}, index=[0])
+    score_dict = pd.DataFrame({
+        'Model/run' : model_run,    # 'RDP_gen'
+        'Data' : data,              # 'x_train_RDP_naX'
+        'Training time' : None, 
+        'Test loss' : None, 
+        'Test accuracy' : acc, 
+        'F1-score' : f1, 
+        'MCC' : mcc}, 
+        index = [0]
+        )
     print(score_dict)
     return score_dict
 
@@ -162,9 +185,8 @@ def RDPoutput2score(pred_file, true_file, level, cf):
 os.system("mkdir {}".format(RDPfiles))
 
 # merge train and validation dataframes into one.
-train = pd.concat([train_na, val_na], ignore_index=True)
-# train = pd.concat([train_a, val_a], ignore_index=True)
-test = test_na
+train = pd.concat([train_data, val_data], ignore_index = True)
+test = test_data
 
 # convert train and test dataframe into tab separated taxonomy and sequence string
 # taxnomy file is converted to a tab separated string
@@ -173,17 +195,20 @@ raw_seqs = ''
 raw_taxons = 'SeqId Kingdom	Phylum	Class	Order	Family	Genus	Species' + '\n'
 for index, row in train.iterrows():
     taxons = row.tolist()
-    raw_seqs += '>' + taxons[0] + '\n' + taxons[-1] + '\n'
-    raw_taxons += '\t'.join(taxons[:-1]) + '\n'
+    raw_seqs += '>' + taxons[0] + '\n' + taxons[seq_col] + '\n'
+    raw_taxons += '\t'.join(taxons[:is_v]) + '\n'
 
 # convert test dataframe into text and fasta files to be utilized by RDP
 # taxnomy file is converted to a tab separated text file
 # sequence file is converted to fasta format
-with open("{}/test_sequences.fasta".format(RDPfiles), "w") as seq_f, open("{}/test_taxonomy.txt".format(RDPfiles), "w") as tax_f:
+with open("{}/test_sequences.fasta".format(RDPfiles), "w") as seq_f, open(
+    "{}/test_taxonomy.txt".format(RDPfiles), "w") as tax_f:
+
     for index, row in test.iterrows():
         taxons = row.tolist()
-        seq_f.write('>' + taxons[0] + '\n' + taxons[-1] + '\n')
-        tax_f.write('\t'.join(taxons[:-1]) + '\n')
+        seq_f.write('>' + taxons[0] + '\n' + taxons[seq_col] + '\n')
+        tax_f.write('\t'.join(taxons[:is_v]) + '\n')
+        
     seq_f.close()
     tax_f.close()
 
@@ -197,18 +222,27 @@ print("Data preprocessing for RDP completed")
 
 # Training the RDP classifier
 start_time = time.time()
-os.system("java -Xmx10g -jar {} train -o {}/training_files -s {}/ready4train_seqs.fasta -t {}/ready4train_taxonomy.txt".format(classifier_loc, RDPfiles, RDPfiles, RDPfiles))
+os.system("java -Xmx10g -jar {} train -o {}/training_files -s {}/ready4train_seqs.fasta -t {}/ready4train_taxonomy.txt".format(
+    classifier_loc, RDPfiles, RDPfiles, RDPfiles))
+
 with open("{}/training_files/rRNAClassifier.properties".format(RDPfiles), "w") as f:
-    f.write("bergeyTree=bergeyTrainingTree.xml" + '\n' + "probabilityList=genus_wordConditionalProbList.txt" + '\n' + "probabilityIndex=wordConditionalProbIndexArr.txt" + '\n' + "wordPrior=logWordPrior.txt" + '\n' + "classifierVersion=RDP Naive Bayesian rRNA Classifier Version 2.5, May 2012 ")
+    f.write("bergeyTree=bergeyTrainingTree.xml\nprobabilityList=genus_wordConditionalProbList.txt\nprobabilityIndex=wordConditionalProbIndexArr.txt\nwordPrior=logWordPrior.txt\nclassifierVersion=RDP Naive Bayesian rRNA Classifier Version 2.5, May 2012 ")
     f.close()
+
 time_taken = round(time.time() - start_time)
 print("RDP training-time: {} seconds".format(time_taken))
 
 # Testing the RDP classifier
-os.system("java -Xmx10g -jar {} classify -t {}/training_files/rRNAClassifier.properties  -o {}/output.txt {}/test_sequences.fasta".format(classifier_loc, RDPfiles, RDPfiles, RDPfiles))
+os.system("java -Xmx10g -jar {} classify -t {}/training_files/rRNAClassifier.properties  -o {}/output.txt {}/test_sequences.fasta".format(
+    classifier_loc, RDPfiles, RDPfiles, RDPfiles))
 
 # Evaluating the RDP classifier and save the results
-score_dict = RDPoutput2score("{}/output.txt".format(RDPfiles), "{}/test_taxonomy.txt".format(RDPfiles), level, confidence_score)
+score_dict = RDPoutput2score("{}/output.txt".format(RDPfiles), 
+"{}/test_taxonomy.txt".format(RDPfiles), level, confidence_score)
+
 score_dict.at[0, 'Training time'] = time_taken
-print(score_dict)
-score_dict.to_csv(f'scores/RDP_evaluation', index=False)
+score_dict.to_csv('scores/RDP_evaluation', index = False)
+
+####################################################################################################
+
+print('RDP training complete!')
