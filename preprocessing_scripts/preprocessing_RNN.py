@@ -93,25 +93,25 @@ print('Mutations rate adjusted one-hot-encoding complete')
 # -----------------------------------------------------------------------------------------------------
 # -----------------------------------------------------------------------------------------------------
 # FOR RNN  |  with matation rate adjusted one-hot-encoding on the V-region selected sequences (CURRENTLY NOT USED)
-# x_train_RNN_v1 = np.array(
+# x_train_RNN_na1V = np.array(
 #     train_na['V_Sequence'].apply(lambda x: one_hot_seq(x, one_hot_dict1, max_len = MAX_LEN_V)).tolist())
-# np.save('arrays/RNN/x_train_RNN_v1.npy', x_train_RNN_v1)
+# np.save('arrays/RNN/x_train_RNN_na1V.npy', x_train_RNN_na1V)
 
-# x_train_RNN_va1 = np.array(
+# x_train_RNN_a1V = np.array(
 #   train_a['V_Sequence'].apply(lambda x: one_hot_seq(x, one_hot_dict1, max_len = MAX_LEN_V)).tolist())
-# np.save('arrays/RNN/x_train_RNN_va1.npy', x_train_RNN_va1)
+# np.save('arrays/RNN/x_train_RNN_a1V.npy', x_train_RNN_a1V)
 
-# x_test_RNN_v1 = np.array(
+# x_test_RNN_na1V = np.array(
 #     test_na['V_Sequence'].apply(lambda x: one_hot_seq(x, one_hot_dict1, max_len = MAX_LEN_V)).tolist())
-# np.save('arrays/RNN/x_test_RNN_v1.npy', x_test_RNN_v1)
+# np.save('arrays/RNN/x_test_RNN_na1V.npy', x_test_RNN_na1V)
 
-# dataval_RNN_v1 = np.array(
+# dataval_RNN_na1V = np.array(
 #     val_na['V_Sequence'].apply(lambda x: one_hot_seq(x, one_hot_dict1, max_len = MAX_LEN_V)).tolist())
-# np.save('arrays/RNN/dataval_RNN_v1.npy', dataval_RNN_v1)
+# np.save('arrays/RNN/dataval_RNN_na1V', dataval_RNN_na1V)
 
-# dataval_RNN_va1 = np.array(
+# dataval_RNN_a1V = np.array(
 #   val_a['V_Sequence'].apply(lambda x: one_hot_seq(x, one_hot_dict1, max_len = MAX_LEN_V)).tolist())
-# np.save('arrays/RNN/dataval_RNN_va1.npy', dataval_RNN_va1)
+# np.save('arrays/RNN/dataval_RNN_a1V.npy', dataval_RNN_a1V)
 # print('Mutations rate adjusted one-hot-encoding V-region complete')
 # -----------------------------------------------------------------------------------------------------
 print('RNN sequences complete')
