@@ -1,0 +1,2 @@
+Model/run,Data,Training time,Test loss,Test accuracy,F1-score,MCC
+BiLSTM_gen,x_train_RNN_na0,1816,2.1633880138397217,0.5034143328666687,0.4332193781378382,0.49935639069012266

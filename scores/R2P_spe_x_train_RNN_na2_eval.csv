@@ -1,0 +1,2 @@
+Model/run,Data,Training time,Test loss,Test accuracy,F1-score,MCC
+R2P_spe,x_train_RNN_na2,1048,0.9855849742889404,0.7465577125549316,0.7124744053894632,0.7454081269951454

@@ -1,0 +1,2 @@
+Model/run,Data,Training time,Test loss,Test accuracy,F1-score,MCC
+RDP_gen,x_train_RDP_naG,28,,0.9472741520205978,0.9492203951449246,0.9470649038921521
