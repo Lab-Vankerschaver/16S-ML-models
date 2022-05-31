@@ -1,2 +1,0 @@
-Model/run,Data,Training time,Test loss,Test accuracy,F1-score,MCC
-RDP_spe,x_train_RDP_naS,31,,0.8979066383073996,0.8982336792131997,0.8975195638270544

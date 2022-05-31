@@ -1,2 +1,0 @@
-Model/run,Data,Training time,Test loss,Test accuracy,F1-score,MCC
-ConvBiLSTM_gen,x_train_RNN_a2,793,0.8610668778419495,0.8248068690299988,0.8173020538654386,0.8236246568233655

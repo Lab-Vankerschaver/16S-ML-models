@@ -1,2 +1,0 @@
-Model/run,Data,Training time,Test loss,Test accuracy,F1-score,MCC
-CNN_gen_3N,x_train_CNN_na3N,43,0.6184201240539551,0.8353296518325806,0.8208829391326912,0.8342005888802911

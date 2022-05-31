@@ -1,2 +1,0 @@
-Model/run,Data,Training time,Test loss,Test accuracy,F1-score,MCC
-CNN_gen_7,x_train_CNN_na7,111,0.21879681944847107,0.9524235725402832,0.9464273629018333,0.9521029055727619
