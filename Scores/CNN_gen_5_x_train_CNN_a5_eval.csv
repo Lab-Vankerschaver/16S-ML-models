@@ -1,0 +1,2 @@
+Model/run,Data,Training time,Test loss,Test accuracy,F1-score,MCC
+CNN_gen_5,x_train_CNN_a5,72,0.3029065430164337,0.935184121131897,0.9291086473352116,0.9347452707638341
